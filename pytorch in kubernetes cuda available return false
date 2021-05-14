@@ -1,0 +1,4 @@
+# Q：Pytorch 容器在docker中cuda available返回True，但是Kubernetes集群中cuda available返回false
+# A：nvidia device plugin 启动时会检查可以挂载的设备，然后给容器配置可访问的nvidia设备，但是不会因为必需的设备缺失而报错，
+#    所以需要检查一下nvidia device plugin中设备列表是否包含/dev/nvidia*,/dev/nvidia-uvm,/dev/nvidiactl 等，题主所
+#    遇到的是缺少/dev/nvidia-uvm，此时重启device-plugin所有pod即可
